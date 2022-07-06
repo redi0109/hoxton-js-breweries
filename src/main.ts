@@ -6,12 +6,22 @@ USState: '',
 breweries: [],
 }
 
+function getBreweries (state: String){
+fetch(`https://api.openbrewerydb.org/breweries?by_state=${state.USState}`)
+.then(response => response.json())
+.then(data => {
+state.breweries = data
+render()
+})
+}
+
+
 function render (){
 
 }
 
 function listenToSelectStateForm (){
-let formEl = document.querySelector('#select-state-form')
+let formEl = document.querySelector<HTMLFormElement>('#select-state-form')
 formEl?.addEventListener('submit', (event) => {
 event.preventDefault()
 let stateEl = document.querySelector('#select-state')
